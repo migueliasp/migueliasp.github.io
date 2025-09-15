@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio of Miguel Elias | Intro Web Development</title>
+    <meta
+      name="description"
+      content="Miguel Elias' portfolio showcasing web development skills, projects, and contact information. Learn more about HTML, CSS, and JavaScript expertise."
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header role="banner">
+      <h1>Portfolio of Miguel Elias</h1>
+      <button
+        class="hamburger"
+        aria-label="Open navigation"
+        aria-controls="main-nav"
+      >
+        <span></span>
+      </button>
+      <nav>
+        <ul id="main-nav" role="navigation">
+          <li><a href="#about-me">About Me</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact-form">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main role="main">
+      <section id="about-me">
+        <h2>Welcome to Intro Web Dev</h2>
+        <h3>About Me</h3>
+        <p>Hello I am me!</p>
+      </section>
+
+      <section id="skills">
+        <h2>Skills</h2>
+        <ul id="skills-list">
+          <li>HTML</li>
+          <li>CSS</li>
+          <li>JavaScript</li>
+        </ul>
+      </section>
+
+      <section id="projects">
+        <h2>Projects</h2>
+        <div id="project-filter" style="margin-bottom: 16px">
+          <label for="filter-select">Filter by type:</label>
+          <select id="filter-select">
+            <option value="all">All</option>
+            <option value="cat">Cat</option>
+            <option value="dog">Dog</option>
+            <option value="hamster">Hamster</option>
+          </select>
+        </div>
+        <article id="project-item" data-type="cat">
+          <h3>Cat Project</h3>
+          <p>This is a description of my sample project.</p>
+          <figure>
+            <img
+              src="https://images.pexels.com/photos/617278/pexels-photo-617278.jpeg?cs=srgb&dl=animal-cute-eyes-617278.jpg&fm=jpg"
+              alt="Cat"
+              width="300"
+            />
+            <figcaption>Screenshot of the sample project</figcaption>
+          </figure>
+        </article>
+        <article id="project-item" data-type="dog">
+          <h3>Dog Project</h3>
+          <p>This is a description of my sample project.</p>
+          <figure>
+            <img
+              src="https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*"
+              alt="Dog"
+              width="300"
+            />
+            <figcaption>Screenshot of the sample project</figcaption>
+          </figure>
+        </article>
+        <article id="project-item" data-type="hamster">
+          <h3>Hamster Project</h3>
+          <p>This is a description of my sample project.</p>
+          <figure>
+            <img
+              src="https://www.petakids.com/wp-content/uploads/2016/10/Brown-Hamster.jpg"
+              alt="Hamster"
+              width="300"
+            />
+            <figcaption>Screenshot of the sample project</figcaption>
+          </figure>
+        </article>
+      </section>
+
+      <section id="contact-form">
+        <h2>Contact Me</h2>
+        <form action="#" method="post">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required />
+
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+
+          <label for="message">Message:</label>
+          <textarea id="message" name="message" rows="4" required></textarea>
+
+          <button type="submit">Send</button>
+        </form>
+      </section>
+    </main>
+    <footer role="contentinfo">
+      <p>&copy; 2024 Intro Web Dev. All rights reserved.</p>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>
