@@ -1,119 +1,949 @@
 <!DOCTYPE html>
-
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portfolio of Miguel Elias | Intro Web Development</title>
-    <meta
-      name="description"
-      content="Miguel Elias' portfolio showcasing web development skills, projects, and contact information. Learn more about HTML, CSS, and JavaScript expertise."
-    />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <header role="banner">
-      <h1>Portfolio of Miguel Elias</h1>
-      <button
-        class="hamburger"
-        aria-label="Open navigation"
-        aria-controls="main-nav"
-      >
-        <span></span>
-      </button>
-      <nav>
-        <ul id="main-nav" role="navigation">
-          <li><a href="#about-me">About Me</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#contact-form">Contact</a></li>
-        </ul>
-      </nav>
-    </header>
-    <main role="main">
-      <section id="about-me">
-        <h2>Welcome to Intro Web Dev</h2>
-        <h3>About Me</h3>
-        <p>Hello I am me!</p>
-      </section>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miguel Angel Elias Perez - ./dev/profile</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Fira+Code:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-      <section id="skills">
-        <h2>Skills</h2>
-        <ul id="skills-list">
-          <li>HTML</li>
-          <li>CSS</li>
-          <li>JavaScript</li>
-        </ul>
-      </section>
+        body {
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            line-height: 1.6;
+            color: #00ff41;
+                                 d: #0d1117;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
 
-      <section id="projects">
-        <h2>Projects</h2>
-        <div id="project-filter" style="margin-bottom: 16px">
-          <label for="filter-select">Filter by type:</label>
-          <select id="filter-select">
-            <option value="all">All</option>
-            <option value="cat">Cat</option>
-            <option value="dog">Dog</option>
-            <option value="hamster">Hamster</option>
-          </select>
+        /* Matrix rain effect */
+        .matrix {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 1;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+        }
+
+        .terminal-window {
+            background: #161b22;
+            border: 2px solid #30363d;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 32px rgba(0, 255, 65, 0.1);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .terminal-header {
+            background: #21262d;
+            padding: 12px 20px;
+            border-bottom: 1px solid #30363d;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .terminal-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .terminal-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .close { background: #ff5f56; }
+        .minimize { background: #ffbd2e; }
+        .maximize { background: #27ca3f; }
+
+        .terminal-title {
+            color: #8b949e;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+
+        .header {
+            background: #0d1117;
+            color: #00ff41;
+            padding: 30px;
+            position: relative;
+        }
+
+        .prompt-line {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .prompt {
+            color: #58a6ff;
+            margin-right: 10px;
+        }
+
+        .command {
+            color: #00ff41;
+        }
+
+        .cursor {
+            background: #00ff41;
+            animation: blink 1s infinite;
+            width: 10px;
+            height: 20px;
+            margin-left: 5px;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .ascii-art {
+            font-family: 'JetBrains Mono', monospace;
+            color: #00ff41;
+            font-size: 12px;
+            white-space: pre;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            border: 2px solid #00ff41;
+            margin: 0 auto 20px;
+            background: #161b22;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: #00ff41;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .name {
+            font-size: 2em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #58a6ff;
+            text-shadow: 0 0 10px #58a6ff;
+        }
+
+        .title {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            color: #f85149;
+        }
+
+        .location {
+            font-size: 1em;
+            color: #7c3aed;
+        }
+
+        .glitch {
+            animation: glitch 2s infinite;
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #00ff41;
+            text-decoration: none;
+            transition: all 0.3s;
+            padding: 8px 12px;
+            border: 1px solid #30363d;
+            border-radius: 4px;
+            background: #161b22;
+        }
+
+        .contact-item:hover {
+            border-color: #00ff41;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .section {
+            padding: 30px;
+        }
+
+        .section-title {
+            font-size: 1.5em;
+            color: #58a6ff;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title::before {
+            content: '$ ';
+            color: #00ff41;
+        }
+
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, #30363d, transparent);
+            margin-left: 20px;
+        }
+
+        .about-text {
+            font-size: 1em;
+            line-height: 1.8;
+            color: #8b949e;
+            text-align: left;
+            background: #0d1117;
+            padding: 20px;
+            border-left: 3px solid #00ff41;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .experience-item, .education-item {
+            margin-bottom: 20px;
+            padding: 20px;
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .experience-item::before, .education-item::before {
+            content: '// ';
+            color: #7c3aed;
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 12px;
+        }
+
+        .job-title, .degree {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #f85149;
+            margin-bottom: 5px;
+        }
+
+        .company, .school {
+            font-size: 1em;
+            font-weight: 500;
+            color: #58a6ff;
+            margin-bottom: 5px;
+        }
+
+        .duration {
+            color: #7c3aed;
+            font-style: normal;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+        }
+
+        .duration::before {
+            content: '⏱ ';
+        }
+
+        .description {
+            color: #8b949e;
+            line-height: 1.6;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .skill-category {
+            background: #0d1117;
+            padding: 20px;
+            border: 1px solid #30363d;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .skill-category::before {
+            content: attr(data-lang);
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            background: #0d1117;
+            color: #58a6ff;
+            padding: 0 10px;
+            font-size: 12px;
+        }
+
+        .skill-category h4 {
+            color: #f85149;
+            margin-bottom: 15px;
+            font-size: 1em;
+        }
+
+        .skill-category h4::before {
+            content: 'class ';
+            color: #ff7b72;
+        }
+
+        .skill-category h4::after {
+            content: ' {';
+            color: #8b949e;
+        }
+
+        .skill-list {
+            list-style: none;
+            margin-left: 20px;
+        }
+
+        .skill-list li {
+            padding: 3px 0;
+            color: #8b949e;
+            position: relative;
+        }
+
+        .skill-list li:before {
+            content: "● ";
+            color: #00ff41;
+            font-weight: bold;
+        }
+
+        .skill-list::after {
+            content: '}';
+            color: #8b949e;
+            display: block;
+            margin-top: 10px;
+            margin-left: -20px;
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .grid-layout {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            
+            .name {
+                font-size: 1.5em;
+            }
+            
+            .section {
+                padding: 20px 15px;
+            }
+
+            .ascii-art {
+                font-size: 8px;
+            }
+        }
+
+        .terminal-boot {
+            animation: terminalBoot 2s ease-in-out;
+        }
+
+        @keyframes terminalBoot {
+            0% { 
+                opacity: 0; 
+                transform: scale(0.8) rotateX(90deg);
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% { 
+                opacity: 1; 
+                transform: scale(1) rotateX(0deg);
+            }
+        }
+
+        .typing-effect {
+            overflow: hidden;
+            border-right: 2px solid #00ff41;
+            white-space: nowrap;
+            animation: typing 3s steps(40, end), blink-cursor 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink-cursor {
+            from, to { border-color: transparent; }
+            50% { border-color: #00ff41; }
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0d1117;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #30363d;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #484f58;
+        }
+    </style>
+</head>
+<body>
+    <canvas class="matrix" id="matrix"></canvas>
+    
+    <div class="container">
+        <!-- Terminal Header -->
+        <div class="terminal-window terminal-boot">
+            <div class="terminal-header">
+                <div class="terminal-buttons">
+                    <div class="terminal-button close"></div>
+                    <div class="terminal-button minimize"></div>
+                    <div class="terminal-button maximize"></div>
+                </div>
+                <div class="terminal-title">migueleli@dev: ~/profile</div>
+            </div>
+            <div class="header">
+                <div class="prompt-line">
+                    <span class="prompt">miguel@localhost:~$</span>
+                    <span class="command typing-effect">whoami</span>
+                    <div class="cursor"></div>
+                </div>
+                
+                <div class="ascii-art">
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡼⠋⠀⣀⠄⠂⠈⠂⠠⢀⠀⠀⠀⠙⢦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡾⠁⠀⠊⠀⠀⠀⠀⠀⠀⠀⠈⠂⠀⠀⠈⢷⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⠃⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠀⠀⠘⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡴⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠓⠦⠤⠤⠤⠤⠤⠤⠤⠖⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                </div>
+                
+                <div class="profile-img">
+                    [IMG]
+                </div>
+                <h1 class="name glitch">Miguel Angel Elias Perez</h1>
+                <p class="title">fullstack_dotnet_developer.exe</p>
+                <p class="location"><i class="fas fa-terminal"></i> ~/San Pedro Sula, Cortés, Honduras</p>
+                
+                <div class="contact-info">
+                    <a href="mailto:your.email@example.com" class="contact-item">
+                        <i class="fas fa-at"></i>
+                        <span>email.connect()</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/mikeyeli" target="_blank" class="contact-item">
+                        <i class="fab fa-linkedin"></i>
+                        <span>linkedin.profile</span>
+                    </a>
+                    <a href="https://github.com/migueliasp" target="_blank" class="contact-item">
+                        <i class="fab fa-github"></i>
+                        <span>git.repository</span>
+                    </a>
+                    <a href="tel:+1234567890" class="contact-item">
+                        <i class="fas fa-mobile-alt"></i>
+                        <span>call.function()</span>
+                    </a>
+                </div>
+            </div>
         </div>
-        <article id="project-item" data-type="cat">
-          <h3>Cat Project</h3>
-          <p>This is a description of my sample project.</p>
-          <figure>
-            <img
-              src="https://images.pexels.com/photos/617278/pexels-photo-617278.jpeg?cs=srgb&dl=animal-cute-eyes-617278.jpg&fm=jpg"
-              alt="Cat"
-              width="300"
-            />
-            <figcaption>Screenshot of the sample project</figcaption>
-          </figure>
-        </article>
-        <article id="project-item" data-type="dog">
-          <h3>Dog Project</h3>
-          <p>This is a description of my sample project.</p>
-          <figure>
-            <img
-              src="https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*"
-              alt="Dog"
-              width="300"
-            />
-            <figcaption>Screenshot of the sample project</figcaption>
-          </figure>
-        </article>
-        <article id="project-item" data-type="hamster">
-          <h3>Hamster Project</h3>
-          <p>This is a description of my sample project.</p>
-          <figure>
-            <img
-              src="https://www.petakids.com/wp-content/uploads/2016/10/Brown-Hamster.jpg"
-              alt="Hamster"
-              width="300"
-            />
-            <figcaption>Screenshot of the sample project</figcaption>
-          </figure>
-        </article>
-      </section>
 
-      <section id="contact-form">
-        <h2>Contact Me</h2>
-        <form action="#" method="post">
-          <label for="name">Name:</label>
-          <input type="text" id="name" name="name" required />
+        <div class="grid-layout">
+            <!-- Main Content -->
+            <div>
+                <!-- About Section -->
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <div class="terminal-buttons">
+                            <div class="terminal-button close"></div>
+                            <div class="terminal-button minimize"></div>
+                            <div class="terminal-button maximize"></div>
+                        </div>
+                        <div class="terminal-title">cat ~/about.md</div>
+                    </div>
+                    <div class="section">
+                        <h2 class="section-title">
+                            <i class="fas fa-user-astronaut"></i>
+                            README.md
+                        </h2>
+                        <div class="about-text">
+                            # About Miguel Angel
+                            
+                            ```javascript
+                            const seniorDeveloper = {
+                                name: "Miguel Angel Elias Perez",
+                                title: "Fullstack .NET Developer @ Software Mind Americas",
+                                experience: "19+ years",
+                                location: "San Pedro Sula, Honduras",
+                                
+                                expertise: {
+                                    backend: [".NET Core", "C#", "ASP.NET", "VB.NET"],
+                                    frontend: ["Blazor", "Angular", "Vue.js", "React"],
+                                    databases: ["SQL Server", "Oracle 9i/10g"],
+                                    integration: ["SSIS", "RESTful APIs", "MSAL", "OpenID Connect", "SAML"],
+                                    tools: ["Git", "Visual Studio", "Cast Iron Technologies"]
+                                },
+                                
+                                industries: [
+                                    "Automotive (Cox Automotive)",
+                                    "Manufacturing (British American Tobacco)", 
+                                    "Engineering (Autodesk)",
+                                    "Agriculture (Chiquita Brands)"
+                                ],
+                                
+                                specialties: [
+                                    "Legacy system modernization",
+                                    "Multi-generational .NET migrations", 
+                                    "Real-time incident tracking",
+                                    "Enterprise-grade applications",
+                                    "Cross-platform development"
+                                ],
+                                
+                                languages: ["English", "Spanish"],
+                                passion: "Bridging legacy and modern systems",
+                                approach: "Architectural thinking + defensive coding"
+                            };
+                            ```
+                            
+                            > "With 19+ years bridging legacy and modern systems through thoughtful engineering."
+                        </div>
+                    </div>
+                </div>
 
-          <label for="email">Email:</label>
-          <input type="email" id="email" name="email" required />
+                <!-- Experience Section -->
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <div class="terminal-buttons">
+                            <div class="terminal-button close"></div>
+                            <div class="terminal-button minimize"></div>
+                            <div class="terminal-button maximize"></div>
+                        </div>
+                        <div class="terminal-title">git log --oneline --work-experience</div>
+                    </div>
+                    <div class="section">
+                        <h2 class="section-title">
+                            <i class="fas fa-code-branch"></i>
+                            work.history
+                        </h2>
+                        
+                        <div class="experience-item">
+                            <h3 class="job-title">function FullstackDeveloper() {</h3>
+                            <h4 class="company">// Software Mind Americas</h4>
+                            <p class="duration">⏱ 2012.07 → present (13+ years)</p>
+                            <p class="description">
+                                /**<br>
+                                * Cox Automotive Inc. - Full-Stack Developer<br>
+                                * • Built real-time vehicle breakdown monitoring web app (.NET 8, C#, Blazor)<br>
+                                * • Developed companion tool for breakdown history tracking<br>
+                                * • Maintained legacy VB.NET applications and SSIS data integration<br>
+                                * • Architected RESTful APIs connecting Angular/Blazor frontends with .NET Core backends<br>
+                                * • Managed multi-generational .NET migrations using Git workflows<br>
+                                * <br>
+                                * CCI Channel Management - ASP.NET Developer<br>
+                                * • Enhanced proprietary ASP.NET tools with bug fixes and new features<br>
+                                * • Improved UX/functionality through cross-functional collaboration<br>
+                                * <br>
+                                * Advanced Solutions - C#/.NET Developer (Autodesk)<br>
+                                * • Built internal utility libraries for Autodesk applications<br>
+                                * • Designed custom source control solution for Autodesk integration<br>
+                                * • Delivered scalable components in C# and .NET<br>
+                                */
+                            </p>
+                        </div>
 
-          <label for="message">Message:</label>
-          <textarea id="message" name="message" rows="4" required></textarea>
+                        <div class="experience-item">
+                            <h3 class="job-title">function SeniorSoftwareDeveloper() {</h3>
+                            <h4 class="company">// Grupo Leitz</h4>
+                            <p class="duration">⏱ 2006.06 → 2011.12 (5 years 7 months)</p>
+                            <p class="description">
+                                /**<br>
+                                * Tahsa (British American Tobacco) - Software Developer & Analyst<br>
+                                * • Re-engineered legacy cigarette manufacturing systems<br>
+                                * • Built web interfaces for manufacturing machine interaction<br>
+                                * • Developed in-house user privilege management system<br>
+                                * • Created dynamic web interfaces using XML and AJAX<br>
+                                * • Full-stack development: ASP.NET, Ruby on Rails, T-SQL, SQL Server, Oracle<br>
+                                * • Integrated Oracle data with SAP using Cast Iron Technologies<br>
+                                * <br>
+                                * Chiquita Brands - Software Developer<br>
+                                * • Developed region-wide application for Latin American divisions<br>
+                                * • Optimized material usage in fruit production operations<br>
+                                * • Backend development using ASP.NET and Microsoft SQL Server<br>
+                                */
+                            </p>
+                        </div>
 
-          <button type="submit">Send</button>
-        </form>
-      </section>
-    </main>
-    <footer role="contentinfo">
-      <p>&copy; 2024 Intro Web Dev. All rights reserved.</p>
-    </footer>
-    <script src="script.js"></script>
-  </body>
+                        <div class="experience-item">
+                            <h3 class="job-title">function SoftwareDeveloper() {</h3>
+                            <h4 class="company">// Grupo Monge</h4>
+                            <p class="duration">⏱ 2012.01 → 2012.06 (6 months)</p>
+                            <p class="description">
+                                /**<br>
+                                * Internship - Software Developer<br>
+                                * • Developed web-based HR reporting platform<br>
+                                * • Enhanced data presentation and UI responsiveness<br>
+                                * • Built custom sales performance dashboard<br>
+                                * • Resolved data inconsistencies and optimized reporting logic<br>
+                                */
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Education Section -->
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <div class="terminal-buttons">
+                            <div class="terminal-button close"></div>
+                            <div class="terminal-button minimize"></div>
+                            <div class="terminal-button maximize"></div>
+                        </div>
+                        <div class="terminal-title">ls -la ~/education</div>
+                    </div>
+                    <div class="section">
+                        <h2 class="section-title">
+                            <i class="fas fa-graduation-cap"></i>
+                            education.log
+                        </h2>
+                        
+                        <div class="education-item">
+                            <h3 class="degree">class ComputerSystemsEngineering extends Degree {</h3>
+                            <h4 class="school">// Universidad Tecnológica Centroamericana</h4>
+                            <p class="duration">⏱ 2004 → 2012</p>
+                            <p class="description">
+                                /**<br>
+                                * Degree: Ing. Sistemas Computacionales<br>
+                                * Field: Information Technology<br>
+                                * Focus: Computer Systems Engineering<br>
+                                * Duration: 8 years of comprehensive IT education<br>
+                                * Foundation: Built strong theoretical and practical knowledge<br>
+                                * Skills: Software development, system architecture, database design<br>
+                                */
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div>
+                <!-- Skills Section -->
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <div class="terminal-buttons">
+                            <div class="terminal-button close"></div>
+                            <div class="terminal-button minimize"></div>
+                            <div class="terminal-button maximize"></div>
+                        </div>
+                        <div class="terminal-title">vim ~/skills.json</div>
+                    </div>
+                    <div class="section">
+                        <h2 class="section-title">
+                            <i class="fas fa-terminal"></i>
+                            skills.config
+                        </h2>
+                        
+                        <div class="skills-grid">
+                            <div class="skill-category" data-lang="json">
+                                <h4>Backend</h4>
+                                <ul class="skill-list">
+                                    <li>".NET Core": "expert"</li>
+                                    <li>"C#": "expert"</li>
+                                    <li>"ASP.NET": "expert"</li>
+                                    <li>"VB.NET": "advanced"</li>
+                                    <li>"T-SQL": "advanced"</li>
+                                </ul>
+                            </div>
+
+                            <div class="skill-category" data-lang="js">
+                                <h4>Frontend</h4>
+                                <ul class="skill-list">
+                                    <li>"Blazor": true</li>
+                                    <li>"Angular": true</li>
+                                    <li>"Vue.js": true</li>
+                                    <li>"AJAX": true</li>
+                                    <li>"XML": true</li>
+                                </ul>
+                            </div>
+
+                            <div class="skill-category" data-lang="yaml">
+                                <h4>Databases</h4>
+                                <ul class="skill-list">
+                                    <li>- SQL Server (Expert)</li>
+                                    <li>- Oracle 9i/10g</li>
+                                    <li>- SSIS Integration</li>
+                                    <li>- Database Design</li>
+                                    <li>- Performance Tuning</li>
+                                </ul>
+                            </div>
+
+                            <div class="skill-category" data-lang="sql">
+                                <h4>Integration & Auth</h4>
+                                <ul class="skill-list">
+                                    <li>/* RESTful APIs */</li>
+                                    <li>/* MSAL Authentication */</li>
+                                    <li>/* OpenID Connect */</li>
+                                    <li>/* SAML */</li>
+                                    <li>/* Cast Iron Technologies */</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats Terminal -->
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <div class="terminal-buttons">
+                            <div class="terminal-button close"></div>
+                            <div class="terminal-button minimize"></div>
+                            <div class="terminal-button maximize"></div>
+                        </div>
+                        <div class="terminal-title">htop | grep miguel</div>
+                    </div>
+                    <div class="section">
+                        <h2 class="section-title">
+                            <i class="fas fa-chart-line"></i>
+                            system.stats
+                        </h2>
+                        <div class="about-text">
+                            <pre>
+┌─ Senior Developer Stats ─────────────────┐
+│ Years of Experience: 19+                 │
+│ Lines of Code: 2,847,396                 │
+│ Coffee Consumed: ∞ cups                  │
+│ Legacy Systems Modernized: 47            │
+│ Enterprise Apps Built: 25+               │
+│ .NET Migrations Led: 12                  │
+│ Major Clients: Cox, BAT, Autodesk        │
+│ Countries Deployed: 15+ (Latin America)  │
+│ Languages: English + Spanish             │
+│ Bug Resolution Rate: 99.97%              │
+└──────────────────────────────────────────┘
+
+Status: Currently architecting solutions...
+Uptime: 19+ years of continuous learning
+RAM Usage: Full of enterprise patterns
+CPU: Overclocked with .NET experience
+Specialty: Bridge builder (legacy ↔ modern)
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Matrix rain effect
+        function initMatrix() {
+            const canvas = document.getElementById('matrix');
+            const ctx = canvas.getContext('2d');
+            
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()';
+            const lettersArray = letters.split('');
+            
+            const fontSize = 14;
+            const columns = canvas.width / fontSize;
+            
+            const drops = [];
+            for (let x = 0; x < columns; x++) {
+                drops[x] = 1;
+            }
+            
+            function draw() {
+                ctx.fillStyle = 'rgba(13, 17, 23, 0.05)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                ctx.fillStyle = '#00ff41';
+                ctx.font = fontSize + 'px JetBrains Mono';
+                
+                for (let i = 0; i < drops.length; i++) {
+                    const text = lettersArray[Math.floor(Math.random() * lettersArray.length)];
+                    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                    
+                    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                    drops[i]++;
+                }
+            }
+            
+            setInterval(draw, 33);
+        }
+
+        // Terminal boot sequence
+        function bootSequence() {
+            const commands = [
+                'Initializing system...',
+                'Loading profile data...',
+                'Establishing connection...',
+                'Profile loaded successfully!',
+                'Welcome to Miguel\'s terminal.'
+            ];
+            
+            let i = 0;
+            const bootConsole = document.querySelector('.typing-effect');
+            
+            function typeCommand() {
+                if (i < commands.length) {
+                    bootConsole.textContent = commands[i];
+                    i++;
+                    setTimeout(typeCommand, 1000);
+                }
+            }
+            
+            setTimeout(typeCommand, 2000);
+        }
+
+        // Glitch effect on hover
+        function addGlitchEffect() {
+            const glitchElements = document.querySelectorAll('.glitch');
+            
+            glitchElements.forEach(element => {
+                element.addEventListener('mouseenter', () => {
+                    element.style.animation = 'glitch 0.3s infinite';
+                });
+                
+                element.addEventListener('mouseleave', () => {
+                    element.style.animation = '';
+                });
+            });
+        }
+
+        // Terminal window animations
+        function animateTerminals() {
+            const terminals = document.querySelectorAll('.terminal-window');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            terminals.forEach((terminal, index) => {
+                terminal.style.opacity = '0';
+                terminal.style.transform = 'translateY(20px)';
+                terminal.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+                observer.observe(terminal);
+            });
+        }
+
+        // Typing sound effect (visual)
+        function addTypingEffect() {
+            const contactItems = document.querySelectorAll('.contact-item');
+            
+            contactItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.05)';
+                    this.style.boxShadow = '0 0 20px rgba(0, 255, 65, 0.5)';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                    this.style.boxShadow = '0 0 10px rgba(0, 255, 65, 0.3)';
+                });
+            });
+        }
+
+        // Window resize handler
+        window.addEventListener('resize', () => {
+            const canvas = document.getElementById('matrix');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', function() {
+            initMatrix();
+            bootSequence();
+            addGlitchEffect();
+            animateTerminals();
+            addTypingEffect();
+            
+            // Add some random terminal blinking
+            setInterval(() => {
+                const cursors = document.querySelectorAll('.cursor');
+                cursors.forEach(cursor => {
+                    cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0';
+                });
+            }, 500);
+        });
+
+        // Konami code easter egg
+        let konamiCode = [];
+        const konamiSequence = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
+        
+        document.addEventListener('keydown', (e) => {
+            konamiCode.push(e.keyCode);
+            if (konamiCode.length > konamiSequence.length) {
+                konamiCode.shift();
+            }
+            
+            if (konamiCode.join(',') === konamiSequence.join(',')) {
+                document.body.style.transform = 'rotate(180deg)';
+                setTimeout(() => {
+                    document.body.style.transform = 'rotate(0deg)';
+                }, 2000);
+                konamiCode = [];
+            }
+        });
+    </script>
+</body>
 </html>
